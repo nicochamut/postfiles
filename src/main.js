@@ -33,7 +33,7 @@ export default async ({ req, res, log, error }) => {
 
  
   if (req.method === 'POST') {
-    try {
+ 
       // Get the documents from the request body
       const documents = req.body;
 
@@ -52,16 +52,8 @@ export default async ({ req, res, log, error }) => {
         message: 'Documents inserted successfully',
         data: response,
       });
-    } catch (error) {
-      // Return an error response if something goes wrong
-     log(error)
-    }
+ 
   }
-  // `res.json()` is a handy helper for sending JSON
-  return res.json({
-    motto: 'Build like a team of hundreds_',
-    learn: 'https://appwrite.io/docs',
-    connect: 'https://appwrite.io/discord',
-    getInspired: 'https://builtwith.appwrite.io',
-  });
+
+
 };
