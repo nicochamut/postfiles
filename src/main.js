@@ -1,4 +1,4 @@
-import { Client,Database } from 'node-appwrite';
+import { Client,Databases } from 'node-appwrite';
 
 // This is your Appwrite function
 // It's executed each time we get a request
@@ -31,7 +31,7 @@ export default async ({ req, res, log, error }) => {
       const documents = req.body;
 
       // Initialize the Appwrite database instance
-      const database = new Database(client);
+      const database = new Databases(client);
 
       // Define the collection ID where you want to insert the documents
       const collectionId = '65fcfa5c603ab403cd6f';
