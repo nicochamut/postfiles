@@ -1,4 +1,4 @@
-import { Client, Databases, ID } from 'node-appwrite';
+import { Client, Databases } from 'node-appwrite';
 
 // This is your Appwrite function
 // It's executed each time we get a request
@@ -41,8 +41,8 @@ export default async ({ req, res, log, error }) => {
       // Validate input (if needed)
 
       // Insert the documents into the collection
-      const documentId = ID.unique();
-      const response = await db.createDocument(dbId, collectionId, documentId, documents);
+      
+      const response = await db.createDocument(dbId, collectionId, documents);
 
       // Return a success response
       return res.json({
