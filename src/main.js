@@ -23,6 +23,10 @@ export default async ({ req, res, log, error }) => {
     return res.send('Hello, World!');
   }
 
+  if(req.method === 'POST'){
+  const documents = req.body
+return res.send(documents)
+}
   // `res.json()` is a handy helper for sending JSON
   return res.json({
     motto: 'Build like a team of hundreds_',
