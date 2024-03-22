@@ -1,4 +1,4 @@
-import { Client } from 'node-appwrite';
+import { Client,Database } from 'node-appwrite';
 
 // This is your Appwrite function
 // It's executed each time we get a request
@@ -47,7 +47,7 @@ export default async ({ req, res, log, error }) => {
       });
     } catch (error) {
       // Return an error response if something goes wrong
-      return res.send(error)
+     log(error)
     }
   }
   // `res.json()` is a handy helper for sending JSON
