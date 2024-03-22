@@ -5,10 +5,11 @@ import { Client } from 'node-appwrite';
 export default async ({ req, res, log, error }) => {
   // Why not try the Appwrite SDK?
   //
-  // const client = new Client()
-  //    .setEndpoint('https://cloud.appwrite.io/v1')
-  //    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
-  //    .setKey(process.env.APPWRITE_API_KEY);
+  const client = new Client()
+  .setEndpoint('https://cloud.appwrite.io/v1')
+  .setProject('65f8fe7c1b33b33daac1')
+  .setKey('65fa3390b6b4498e48a4');
+
 
   // You can log messages to the console
   log('Hello, Logs!');
@@ -23,10 +24,36 @@ export default async ({ req, res, log, error }) => {
     return res.send('Hello, World!');
   }
 
-  if(req.method === 'POST'){
-  const documents = req.body
-return res.send(documents)
-}
+ 
+  if (req.method === 'POST') {
+    try {
+      // Get the documents from the request body
+      const documents = req.body;
+
+      // Initialize the Appwrite database instance
+      const database = new Database(client);
+
+      // Define the collection ID where you want to insert the documents
+      const collectionId = '65fcfa5c603ab403cd6f';
+
+      // Insert the documents into the collection
+      const response = await database.createDocument(collectionId, documents);
+
+      // Return a success response
+      return res.json({
+        success: true,
+        message: 'Documents inserted successfully',
+        data: response,
+      });
+    } catch (error) {
+      // Return an error response if something goes wrong
+      return res.status(500).json({
+        success: false,
+        message: 'An error occurred while inserting documents',
+        error: error.message,
+      });
+    }
+  }
   // `res.json()` is a handy helper for sending JSON
   return res.json({
     motto: 'Build like a team of hundreds_',
