@@ -11,6 +11,11 @@ export default async ({ req, res, log, error }) => {
   .setKey('65fa3390b6b4498e48a4');
 
 
+  const db_id = '65f8ff0c59be436ec9cb'
+  const collection_id = '65fcfa5c603ab403cd6f'
+
+
+  const db = new Databases(client);
   // You can log messages to the console
   log('Hello, Logs!');
 
@@ -19,9 +24,11 @@ export default async ({ req, res, log, error }) => {
 
   // The `req` object contains the request data
   if (req.method === 'GET') {
-    // Send a response with the res object helpers
-    // `res.send()` dispatches a string back to the client
-    return res.send('Hello, World!');
+         const response = await db.listDocuments(
+          db_id,
+          collection_id
+         )
+    return res.json(response);
   }
 
  
@@ -30,14 +37,14 @@ export default async ({ req, res, log, error }) => {
       // Get the documents from the request body
       const documents = req.body;
 
-      // Initialize the Appwrite database instance
-      const database = new Databases(client);
-
-      // Define the collection ID where you want to insert the documents
-      const collectionId = '65fcfa5c603ab403cd6f';
-
+      
       // Insert the documents into the collection
-      const response = await database.createDocument(collectionId, documents);
+      const response = await db.createDocument(
+        db_id,
+        collection_id,
+        ID.unique(),
+        documents
+      );
 
       // Return a success response
       return res.json({
