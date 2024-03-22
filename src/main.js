@@ -47,11 +47,7 @@ export default async ({ req, res, log, error }) => {
       });
     } catch (error) {
       // Return an error response if something goes wrong
-      return res.status(500).json({
-        success: false,
-        message: 'An error occurred while inserting documents',
-        error: error.message,
-      });
+      return res.send(error)
     }
   }
   // `res.json()` is a handy helper for sending JSON
