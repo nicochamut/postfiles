@@ -44,6 +44,8 @@ export default async ({ req, res, log, error }) => {
       
       const response = await db.createDocument(dbId, collectionId, documents);
 
+      return response
+
       // Return a success response
       return res.json({
         success: true,
